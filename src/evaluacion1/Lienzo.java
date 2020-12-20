@@ -34,11 +34,14 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        System.out.println("");
         for (Nodo nodos : vectorNodos) {
             nodos.pintar(g);
+            System.out.println(nodos);
         }
         for (Enlace enlaces : vectorEnlaces) {
             enlaces.pintar(g);
+            System.out.println(enlaces);
         }
     }
     

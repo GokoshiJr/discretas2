@@ -47,5 +47,10 @@ public class Nodo {
     public String getNombre() {
         return nombre;
     }
+
+    @Override
+    public String toString() {
+        return "Nodo{" + "x=" + x + ", y=" + y + ", nombre=" + nombre + '}';
+    }
     
 }

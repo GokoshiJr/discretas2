@@ -56,5 +56,10 @@ public class Enlace {
     public String getNombre() {
         return nombre;
     }
+
+    @Override
+    public String toString() {
+        return "Enlace{" + "x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + ", nombre=" + nombre + '}';
+    }
     
 }
