@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package evaluacion1;
 
 /**
  *
  * @author GokoshiJr
  */
+
 public class Camino {
     
     private int peso, origen, destino;
@@ -45,8 +42,7 @@ public class Camino {
 
     @Override
     public String toString() {
-        return "Camino{" + "peso=" + peso + ", origen=" + origen + ", destino=" + destino + '}';
+        return "Camino{Origen: " + origen + ", Destino: " + destino + ", Peso: " + peso + "}";
     }
-    
     
 }

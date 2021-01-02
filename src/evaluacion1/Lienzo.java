@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Vector;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -17,16 +17,16 @@ import javax.swing.JPanel;
  */
 
 public class Lienzo extends JPanel implements MouseListener, MouseMotionListener {
-    
-    private Vector<Nodo> vectorNodos;
-    private Vector<Enlace> vectorEnlaces;
+
+    private ArrayList<Nodo> vectorNodos;
+    private ArrayList<Enlace> vectorEnlaces;
     private Point p1, p2;
     private Nodo nodoMover;
     private int contadorNodo;
     
     public Lienzo() {
-        this.vectorNodos = new Vector<>();
-        this.vectorEnlaces = new Vector<>();
+        this.vectorNodos = new ArrayList<>();
+        this.vectorEnlaces = new ArrayList<>();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }
@@ -34,27 +34,25 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        System.out.println("");
         for (Nodo nodos : vectorNodos) {
             nodos.pintar(g);
-            System.out.println(nodos);
         }
         for (Enlace enlaces : vectorEnlaces) {
             enlaces.pintar(g);
-            System.out.println(enlaces);
         }
+        Utilitario.mostrarDatos(vectorNodos, vectorEnlaces);
     }
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            String nombre = JOptionPane.showInputDialog("Ingrese el nombre del nodo");
+        if (e.getButton() == MouseEvent.BUTTON1) { // Click Derecho 
+            String nombre = JOptionPane.showInputDialog("Ingrese el nombre del Nodo");
             this.vectorNodos.add(new Nodo(e.getX(), e.getY(), nombre));
             repaint();
         }
-        if (e.getButton() == MouseEvent.BUTTON3) {
+        if (e.getButton() == MouseEvent.BUTTON3) { // Click Izquierdo
             for (Nodo nodos : vectorNodos) {
-                if (new Rectangle(nodos.getX() - (Nodo.diametro / 2), nodos.getY() - (Nodo.diametro / 2), Nodo.diametro, Nodo.diametro).contains(e.getPoint())) {
+                if (new Rectangle(nodos.getX() - (Nodo.DIAMETRO / 2), nodos.getY() - (Nodo.DIAMETRO / 2), Nodo.DIAMETRO, Nodo.DIAMETRO).contains(e.getPoint())) {
                     if (p1 == null) {
                         p1 = new Point(nodos.getX(), nodos.getY());
                     } else {
@@ -74,7 +72,7 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     public void mousePressed(MouseEvent e) {
         int contador = 0;
         for (Nodo nodo : vectorNodos) {
-            if (new Rectangle(nodo.getX() - Nodo.diametro/2, nodo.getY() - Nodo.diametro/2, Nodo.diametro, Nodo.diametro).contains(e.getPoint())) {
+            if (new Rectangle(nodo.getX() - Nodo.DIAMETRO/2, nodo.getY() - Nodo.DIAMETRO/2, Nodo.DIAMETRO, Nodo.DIAMETRO).contains(e.getPoint())) {
                 nodoMover = nodo;
                 contadorNodo = contador;
                 break;
@@ -88,26 +86,19 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         nodoMover = null;
         contadorNodo = -1;
     }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
-    }
-
+    
     @Override
     public void mouseDragged(MouseEvent e) {
+        /**
+         * Cuando arrastramos un nodo, este evento reajusta las coordenadas
+         */
         if (nodoMover != null) {
             this.vectorNodos.set(contadorNodo, new Nodo(e.getX(), e.getY(), nodoMover.getNombre()));
             int contadorEnlace = 0;
             for (Enlace enlace : vectorEnlaces) {
-                if (new Rectangle(enlace.getX1() - Nodo.diametro/2, enlace.getY1() - Nodo.diametro/2, Nodo.diametro, Nodo.diametro).contains(e.getPoint())) {
+                if (new Rectangle(enlace.getX1() - Nodo.DIAMETRO/2, enlace.getY1() - Nodo.DIAMETRO/2, Nodo.DIAMETRO, Nodo.DIAMETRO).contains(e.getPoint())) {
                     this.vectorEnlaces.set(contadorEnlace, new Enlace(e.getX(), e.getY(), enlace.getX2(), enlace.getY2(), enlace.getNombre()));
-                } else if (new Rectangle(enlace.getX2() - Nodo.diametro/2, enlace.getY2() - Nodo.diametro/2, Nodo.diametro, Nodo.diametro).contains(e.getPoint())) {
+                } else if (new Rectangle(enlace.getX2() - Nodo.DIAMETRO/2, enlace.getY2() - Nodo.DIAMETRO/2, Nodo.DIAMETRO, Nodo.DIAMETRO).contains(e.getPoint())) {
                     this.vectorEnlaces.set(contadorEnlace, new Enlace(enlace.getX1(), enlace.getY1(), e.getX(), e.getY(), enlace.getNombre()));
                 }
                 contadorEnlace++;
@@ -115,10 +106,14 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         }
         repaint();
     }
+    
+    @Override
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void mouseExited(MouseEvent e) {}
+    
+    @Override
+    public void mouseMoved(MouseEvent e) {}
     
 }

@@ -11,7 +11,7 @@ public class Nodo {
     
     private int x, y;
     private String nombre;
-    public static final int diametro = 60; // Diametro
+    public static final int DIAMETRO = 60;
     
     public Nodo(int x, int y, String nombre) {
         this.x = x;
@@ -19,8 +19,12 @@ public class Nodo {
         this.nombre = nombre;
     }
     
+    /**
+     * Dibuja un circulo/ovalo que es el nodo, donde le indicamos las coordenadas
+     * @param g 
+     */
     public void pintar(Graphics g) {
-        g.drawOval(x - diametro / 2, y - diametro / 2, diametro, diametro);
+        g.drawOval(x - DIAMETRO / 2, y - DIAMETRO / 2, DIAMETRO, DIAMETRO);
         g.drawString(nombre, x, y);
     }
 
@@ -33,7 +37,7 @@ public class Nodo {
     }
 
     public static int getDiametro() {
-        return diametro;
+        return DIAMETRO;
     }
 
     public void setX(int x) {
