@@ -14,21 +14,19 @@ public class Utilitario {
     public static String linea = "-----------------------------------";
     
     public static void menu() {
-        JFrame ventana = new JFrame("Grafo");
-        ventana.add(new Lienzo());
-        ventana.setSize(600, 600);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setVisible(true);
+        System.out.println(" Presione la tecla Space \n para ver los resultados");
+        Lienzo lienzo = new Lienzo();
+        lienzo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     /**
-     * Muestra los datos generales de la evaluacion 
+     * Muestra los datos generales de la evaluacion en la consola 
      * @param vectorNodos
      * @param vectorEnlaces 
      */
     public static void mostrarDatos(ArrayList<Nodo> vectorNodos, ArrayList<Enlace> vectorEnlaces) {
         System.out.println(linea);
-        System.out.println(" Estructuras Discretas 2 - Evaluación 1");
+        System.out.println(" Est. Discretas 2 - Evaluación 1");
         System.out.println(linea);
         System.out.println(" N de elementos/nodos: " + vectorNodos.size());
         System.out.println(" N de aristas/enlaces: " + vectorEnlaces.size());
@@ -36,6 +34,11 @@ public class Utilitario {
         System.out.println(" Algoritmo de Kruskal");
         System.out.println(linea);
         Kruskal.minimoCoste(vectorNodos, vectorEnlaces);
+        // Dijkstra.rutaMinima(vectorNodos, vectorEnlaces);
+        /* 
+            Maru coloca la llamada a tu clase dentro de este metodo mostrarDatos()
+        */
+        // Ejemplo: Warshall.matrices(vectorNodos, vectorEnlaces);
     }
     
     /**
@@ -57,4 +60,5 @@ public class Utilitario {
         }
         return result;
     }
+    
 }

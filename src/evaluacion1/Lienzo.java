@@ -4,19 +4,21 @@ package evaluacion1;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
  * @author GokoshiJr
  */
 
-public class Lienzo extends JPanel implements MouseListener, MouseMotionListener {
+public class Lienzo extends JFrame implements MouseListener, MouseMotionListener {
 
     private ArrayList<Nodo> vectorNodos;
     private ArrayList<Enlace> vectorEnlaces;
@@ -25,10 +27,14 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     private int contadorNodo;
     
     public Lienzo() {
-        this.vectorNodos = new ArrayList<>();
-        this.vectorEnlaces = new ArrayList<>();
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
+        vectorNodos = new ArrayList<>();
+        vectorEnlaces = new ArrayList<>();
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        setVisible(true);
+        setBounds(700, 300, 600, 450);
+        EventoTeclado tecla = new EventoTeclado();
+        addKeyListener(tecla);
     }
     
     @Override
@@ -40,7 +46,6 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         for (Enlace enlaces : vectorEnlaces) {
             enlaces.pintar(g);
         }
-        Utilitario.mostrarDatos(vectorNodos, vectorEnlaces);
     }
     
     @Override
@@ -116,4 +121,24 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     @Override
     public void mouseMoved(MouseEvent e) {}
     
+    class EventoTeclado implements KeyListener {
+        /**
+         * Metodo de evento para que al presionar el espacio, muestre los datos de la evaluacion 
+         * @param e 
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == 32) {
+                Utilitario.mostrarDatos(vectorNodos, vectorEnlaces);
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {}
+        
+        @Override
+        public void keyTyped(KeyEvent e) {}
+
+    }
+
 }
