@@ -41,18 +41,15 @@ public class Warshall {
             ArrayList<Integer> auxFilas = new ArrayList<>();
             
             for(Nodo e2: vectorNodos){
-                
+                int aux = 0;
                 for(Camino camino : caminoArray){
                     if(Integer.parseInt(e.getNombre()) == camino.getOrigen() && Integer.parseInt(e2.getNombre()) == camino.getDestino()){
-                        auxFilas.add(1);
-                    }
-                    else{
-                        auxFilas.add(0);
+                        aux = 1;
                     }
                     
                     
                 }
-               
+               auxFilas.add(aux);
             }
              matriz.add(auxFilas);
             
