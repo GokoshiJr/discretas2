@@ -39,6 +39,7 @@ public class Utilitario {
             Maru coloca la llamada a tu clase dentro de este metodo mostrarDatos()
         */
         // Ejemplo: Warshall.matrices(vectorNodos, vectorEnlaces);
+        Warshall.cierreTransitivo(vectorNodos, vectorEnlaces);
     }
     
     /**
