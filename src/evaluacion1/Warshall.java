@@ -1,3 +1,4 @@
+
 package evaluacion1;
 
 import java.util.*;
@@ -6,9 +7,8 @@ import java.util.*;
  *
  * @author Maru
  */
+
 public class Warshall {
-    
-    
     
     public static void cierreTransitivo (ArrayList<Nodo> vectorNodos, ArrayList<Enlace> vectorEnlaces) {
         
@@ -25,7 +25,6 @@ public class Warshall {
         aristas = vectorEnlaces.size();
         
         // Encontrar caminos
-        
         for (int i=0; i<aristas; i++) {
             datos = Utilitario.getOrigen(vectorEnlaces.get(i), vectorNodos);
             origen = Integer.parseInt(datos[0]) ;
@@ -36,13 +35,12 @@ public class Warshall {
         }
         
         // Matriz de adyacencia
-        
         for (Nodo e: vectorNodos) {
             ArrayList<Integer> auxFilas = new ArrayList<>(); // Array que guarda una fila entera
-            for(Nodo e2: vectorNodos){
+            for (Nodo e2: vectorNodos) {
                 int aux = 0;
-                for(Camino camino : caminoArray){
-                    if(Integer.parseInt(e.getNombre()) == camino.getOrigen() && Integer.parseInt(e2.getNombre()) == camino.getDestino()){
+                for (Camino camino : caminoArray) {
+                    if (Integer.parseInt(e.getNombre()) == camino.getOrigen() && Integer.parseInt(e2.getNombre()) == camino.getDestino()) {
                         aux = 1;
                     }
                 }
@@ -50,27 +48,27 @@ public class Warshall {
             }
              matriz.add(auxFilas);
         }
+        
         System.out.println("\n Matriz de adyacencia");
         vectorMethods.showMatrix(matriz);
         System.out.println("");
         
         // Matrices de cierre transitivo
-        
-        for (int k = 0; k<nodos; k++){
-            for (int i=0; i<nodos; i++){
-                for (int j = 0; j < nodos; j++) {
-                    if(i == k || j == k){
+        for (int k=0; k<nodos; k++) {
+            for (int i=0; i<nodos; i++) {
+                for (int j=0; j<nodos; j++) {
+                    if (i == k || j == k) {
                         continue;
                     }
-                    if(matriz.get(k).get(i) == 1 && matriz.get(j).get(k) == 1 ){
+                    if (matriz.get(k).get(i) == 1 && matriz.get(j).get(k) == 1 ) {
                         ArrayList<Integer> aux = new ArrayList<>(matriz.get(j));
-                        aux.set(i,1);
+                        aux.set(i, 1);
                         matriz.set(j, aux);
                     }
                 }
                 
             }
-            System.out.printf("Nodo %s \n",k);
+            System.out.printf(" Nodo %s \n", k);
             vectorMethods.showMatrix(matriz);
             System.out.println("");
         }

@@ -32,7 +32,7 @@ public class Lienzo extends JFrame implements MouseListener, MouseMotionListener
         addMouseListener(this);
         addMouseMotionListener(this);
         setVisible(true);
-        setBounds(700, 300, 600, 450);
+        setBounds(0, 0, 600, 500);
         EventoTeclado tecla = new EventoTeclado();
         addKeyListener(tecla);
     }
@@ -128,8 +128,8 @@ public class Lienzo extends JFrame implements MouseListener, MouseMotionListener
          */
         @Override
         public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == 32) {
-                Utilitario.mostrarDatos(vectorNodos, vectorEnlaces);
+            if (e.getKeyCode() == 74 || e.getKeyCode() == 77) {
+                Utilitario.mostrarDatos(vectorNodos, vectorEnlaces, e.getKeyCode());
             }
         }
 
