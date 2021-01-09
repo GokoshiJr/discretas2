@@ -21,7 +21,7 @@ public class Warshall {
         String datos[] = new String[3];
         
         nodos = vectorNodos.size();
-        ArrayList<ArrayList<Integer>> matriz = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> matriz = new ArrayList<>(); // Inicializacion de matriz de cierre transitivo
         aristas = vectorEnlaces.size();
         
         // Encontrar caminos
@@ -38,34 +38,42 @@ public class Warshall {
         // Matriz de adyacencia
         
         for (Nodo e: vectorNodos) {
-            ArrayList<Integer> auxFilas = new ArrayList<>();
-            
+            ArrayList<Integer> auxFilas = new ArrayList<>(); // Array que guarda una fila entera
             for(Nodo e2: vectorNodos){
                 int aux = 0;
                 for(Camino camino : caminoArray){
                     if(Integer.parseInt(e.getNombre()) == camino.getOrigen() && Integer.parseInt(e2.getNombre()) == camino.getDestino()){
                         aux = 1;
                     }
-                    
-                    
                 }
                auxFilas.add(aux);
             }
              matriz.add(auxFilas);
-            
         }
-        // Mostrar matriz
+        System.out.println("\n Matriz de adyacencia");
+        vectorMethods.showMatrix(matriz);
+        System.out.println("");
         
-        System.out.println("Matriz de adyacencia");
-        for(ArrayList<Integer> e: matriz){
-            
-            for(int e2 : e){
-                System.out.printf("%5s",e2);
+        // Matrices de cierre transitivo
+        
+        for (int k = 0; k<nodos; k++){
+            for (int i=0; i<nodos; i++){
+                for (int j = 0; j < nodos; j++) {
+                    if(i == k || j == k){
+                        continue;
+                    }
+                    if(matriz.get(k).get(i) == 1 && matriz.get(j).get(k) == 1 ){
+                        ArrayList<Integer> aux = new ArrayList<>(matriz.get(j));
+                        aux.set(i,1);
+                        matriz.set(j, aux);
+                    }
+                }
+                
             }
-            System.out.println(' ');
-          
+            System.out.printf("Nodo %s \n",k);
+            vectorMethods.showMatrix(matriz);
+            System.out.println("");
         }
- 
         
     }
     
