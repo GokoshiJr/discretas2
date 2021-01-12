@@ -28,6 +28,7 @@ public class Utilitario {
      * Muestra los datos generales de la evaluacion en la consola 
      * @param vectorNodos
      * @param vectorEnlaces 
+     * @param tecla 
      */
     public static void mostrarDatos(ArrayList<Nodo> vectorNodos, ArrayList<Enlace> vectorEnlaces, int tecla) {
         
@@ -58,7 +59,6 @@ public class Utilitario {
         }
         
         if (tecla == 77) {
-//            System.out.println(linea);
             System.out.println(" Algoritmo de Warshall");
             System.out.println(linea);
             Warshall.cierreTransitivo(vectorNodos, vectorEnlaces);
